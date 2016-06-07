@@ -1,128 +1,10 @@
-var assert = require('./utils/assert')
-var data = require('./data/data')
-var expectedArrayOfArrays = require('./data/array-of-arrays')
-var expectedFormattedDates = require('./data/formatted-dates')
-var utilsIndex = require('./utils/index')
-var filter = require('./utils/filter.js')
+var assert = require('./assert')
+var data = require('./../data')
+var expectedArrayOfArrays = require('./../array-of-arrays')
+var expectedFormattedDates = require('./../formatted-dates')
+var utilsIndex = require('./../index')
+var filter = require('./../lib/filter.js')
 
-
-var meaningOfLife = '42'
-
-function each (func, arr) {
-  for (var i = 0; i < arr.length; i++) {
-    func(arr[i])
-  }
-}
-
-/*
- * getType
- */
-
-function getType (thing) {
-  if (typeof thing === 'string'){
-    return 'string'
-  }
-    else if (typeof thing === 'object'){
-      return 'object'
-    }
-}
-
-assert(getType(meaningOfLife), 'string', 'meaningOfLife is a string data type')
-assert(getType(data), 'object', 'data is an object')
-
-/*
- * isNumber
- */
-
-function isNumber (thing) {
-  return (typeof thing === 'number')
-}
-
-assert(isNumber(meaningOfLife), false, 'meaningOfLife is not a number datatype')
-
-/*
- * isStringNumber
- */
-
-function isStringNumber (str) {
-  var num = parseInt(str)
-  if (isNaN(num)) return false
-
-  return (typeof num === 'number')
-}
-
-assert(isStringNumber(meaningOfLife), true, 'meaningOfLife to string number')
-assert(isStringNumber('jsksk'), false, 'isStringNumber does not give a false positive')
-
-/*
- * toNumber
- */
-
-function toNumber (str) {
-  return parseInt(str)
-}
-
-assert(toNumber(meaningOfLife), 42, 'toNumber can convert strings to number if possible')
-
-/*
- * add
- */
-
-function add (a, b) {
-  return a + b
-}
-
-assert(add(2, 3), 5, 'add successfully adds two numbers')
-
-/*
- * addStrings
- */
-
-function addStrings (a, b) {
-  var number = parseInt(a) + parseInt(b)
-  return number.toString()
-}
-
-assert(addStrings(meaningOfLife, '10'), '52', 'addStrings can add number strings and convert them back to a string')
-
-/*
- * addStringsOrNumbers
- */
-
-function addStringsOrNumbers (a, b) {
-  var wasStr = false
-  if (typeof a === 'string') {
-    a = parseInt(a)
-    wasStr = true
-  }
-  if (typeof b === 'string') {
-    b = parseInt(b)
-    wasStr = true
-  }
-
-  var number = a + b
-  if (wasStr === true) return number.toString()
-  return number
-}
-
-assert(addStringsOrNumbers(2, 3), 5, 'addStringsOrNumbers can add numbers')
-assert(addStringsOrNumbers('1', '2'), '3', 'addStringsOrNumbers can add strings')
-assert(addStringsOrNumbers('10', 10), '20', 'addStringsOrNumbers can add strings and numbers (returning a string)')
-
-/*
- * isEmail
- */
-
-function isEmail (str) {
-  return str.includes("@") && str.includes(".")
-  // var re = /^\w+@\w+.\w[a-zA-Z]{2,3}$/;
-  // console.log(re.test(str))
-  // return re.test(str);
-}
-
-assert(isEmail('thedonald@makeamericagreatagain.com'), true, 'isEmail detects an email')
-assert(isEmail('3333@'), false, 'isEmail does not give a false positive')
-assert(isEmail('johnny.b.good'), false, 'isEmail does not give a false positive')
 
 /*
  * Emails
@@ -135,6 +17,7 @@ assert(emails.length, 44, 'filter and isEmail returns the correct number of emai
 
 var isString = function (s) {
   return typeof s === 'string'
+
 }
 var mixedArray = [1, '21', null, Date.now(), 5, meaningOfLife, 42]
 var expectedNumberCount = 4 // do you know which 4 are numbers?
