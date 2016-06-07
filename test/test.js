@@ -10,15 +10,29 @@ var filter = require('./../lib/filter.js')
  * Emails
  */
 
+function isEmail (str) {
+  return str.includes("@") && str.includes(".")
+}
+
 var emails = filter(isEmail, data)
 assert(emails.length, 44, 'filter and isEmail returns the correct number of emails')
 
+
+/* isNumber */
+
+function isNumber (thing) {
+  return (typeof thing === 'number')
+}
+
 /* count If */
+
+var meaningOfLife = '42'
 
 var isString = function (s) {
   return typeof s === 'string'
 
 }
+
 var mixedArray = [1, '21', null, Date.now(), 5, meaningOfLife, 42]
 var expectedNumberCount = 4 // do you know which 4 are numbers?
 var expectedStringCount = 2
